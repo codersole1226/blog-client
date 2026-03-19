@@ -1,27 +1,29 @@
 :root {
-    --bg: #f5efe4;
-    --bg-soft: rgba(255, 250, 241, 0.72);
-    --panel: #fffaf2;
-    --panel-strong: #fffdf8;
-    --text: #5f5547;
-    --text-h: #1e1912;
-    --border: rgba(108, 88, 62, 0.14);
-    --line: rgba(108, 88, 62, 0.24);
-    --accent: #b85c38;
-    --accent-strong: #8f3e1f;
-    --accent-bg: rgba(184, 92, 56, 0.1);
-    --shadow: 0 20px 60px rgba(66, 44, 18, 0.12);
-    --shadow-soft: 0 16px 36px rgba(95, 71, 44, 0.08);
+    --bg: #f3fbf8;
+    --bg-soft: rgba(244, 255, 251, 0.78);
+    --panel: rgba(255, 255, 255, 0.78);
+    --panel-strong: rgba(255, 255, 255, 0.92);
+    --text: #5b6f6a;
+    --text-h: #20413c;
+    --border: rgba(101, 145, 136, 0.16);
+    --line: rgba(101, 145, 136, 0.3);
+    --accent: #77c6b7;
+    --accent-strong: #3b9987;
+    --accent-bg: rgba(119, 198, 183, 0.16);
+    --accent-alt: #9fc6f7;
+    --shadow: 0 22px 60px rgba(92, 152, 140, 0.12);
+    --shadow-soft: 0 14px 34px rgba(125, 176, 167, 0.1);
 
     --sans:
-        'Avenir Next', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+        'SF Pro Display', 'Avenir Next', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
         'Microsoft YaHei', sans-serif;
     --heading:
-        'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', 'STSong', serif;
+        'SF Pro Rounded', 'Nunito', 'Avenir Next', 'PingFang SC',
+        'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
     --mono: ui-monospace, Consolas, monospace;
 
     font: 16px/150% var(--sans);
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
     color: var(--text);
     background: var(--bg);
     font-synthesis: none;
@@ -32,19 +34,20 @@
 }
 
 :root[data-theme='night'] {
-    --bg: #1d1a17;
-    --bg-soft: rgba(33, 29, 25, 0.72);
-    --panel: #26211c;
-    --panel-strong: #2e2721;
-    --text: #d6cbba;
-    --text-h: #fff8ee;
-    --border: rgba(214, 203, 186, 0.14);
-    --line: rgba(214, 203, 186, 0.24);
-    --accent: #d88a63;
-    --accent-strong: #efb18e;
-    --accent-bg: rgba(216, 138, 99, 0.14);
-    --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-    --shadow-soft: 0 16px 36px rgba(0, 0, 0, 0.26);
+    --bg: #0f1f1d;
+    --bg-soft: rgba(18, 34, 31, 0.78);
+    --panel: rgba(22, 42, 39, 0.8);
+    --panel-strong: rgba(26, 50, 46, 0.92);
+    --text: #c9e2dc;
+    --text-h: #effffb;
+    --border: rgba(176, 230, 219, 0.14);
+    --line: rgba(176, 230, 219, 0.28);
+    --accent: #7fd9c8;
+    --accent-strong: #b9f1e5;
+    --accent-bg: rgba(127, 217, 200, 0.16);
+    --accent-alt: #8cbef4;
+    --shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+    --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.22);
     color-scheme: dark;
 }
 
@@ -60,14 +63,16 @@ body {
     margin: 0;
     min-height: 100vh;
     background:
-        radial-gradient(circle at top left, rgba(255, 255, 255, 0.88), transparent 28rem),
-        linear-gradient(180deg, #f8f1e6 0%, #f4ecdf 44%, #efe4d4 100%);
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.92), transparent 26rem),
+        radial-gradient(circle at top right, rgba(159, 198, 247, 0.22), transparent 24rem),
+        linear-gradient(180deg, #f4fffb 0%, #edf9f7 46%, #e8f6f4 100%);
 }
 
 :root[data-theme='night'] body {
     background:
-        radial-gradient(circle at top left, rgba(216, 138, 99, 0.14), transparent 28rem),
-        linear-gradient(180deg, #171411 0%, #1c1814 44%, #241e18 100%);
+        radial-gradient(circle at top left, rgba(127, 217, 200, 0.14), transparent 28rem),
+        radial-gradient(circle at top right, rgba(140, 190, 244, 0.12), transparent 24rem),
+        linear-gradient(180deg, #0b1716 0%, #10201e 46%, #142825 100%);
 }
 
 #root {
@@ -79,9 +84,9 @@ h2,
 h3,
 h4 {
     font-family: var(--heading);
-    font-weight: 700;
+    font-weight: 800;
     color: var(--text-h);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
 }
 
 h1 {
@@ -112,7 +117,11 @@ input {
     font: inherit;
 }
 
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
 img {
     display: block;
     max-width: 100%;
-}    
+}

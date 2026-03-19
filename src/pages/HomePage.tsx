@@ -30,22 +30,25 @@ export default function HomePage({
 
     return (
         <>
-            <section className="hero">
-                <div className="hero-copy">
+            <section className="home-intro">
+                <div className="hero hero-copy">
                     <p className="eyebrow">Frontend Engineer / Builder / Writer</p>
-                    <h2 className="hero-title">这里不是博客封面，而是我的个人工作台与长期输出。</h2>
+                    <h2 className="hero-title">把前端、写作和个人项目，整理成一张安静但有温度的主页。</h2>
                     <p className="hero-summary">
-                        我关注前端体验、产品表达和个人项目。写作只是其中一部分，这个首页更像一张持续更新的个人名片：你可以快速知道我在做什么、关心什么、最近写了什么。
+                        我在做前端，也持续记录自己的想法和实践。这个站点想表达的不是“我发了多少文章”，而是我如何看待产品、界面和长期创作。
                     </p>
                     <div className="hero-actions">
-                        <Link to="/about" className="primary-link">认识我</Link>
-                        <Link to="/archive" className="secondary-link">查看最近写作</Link>
+                        <Link to="/about" className="primary-link">关于我</Link>
+                        <Link to="/archive" className="secondary-link">最近写作</Link>
                     </div>
                 </div>
-                <aside className="hero-panel">
-                    <p className="panel-label">Current Focus</p>
-                    <p className="panel-title">把个人网站做成一个真实的人，而不是一个自动排版的文章仓库。</p>
-                    <div className="hero-metrics">
+                <aside className="hero-panel intro-note">
+                    <div className="intro-note-head">
+                        <p className="panel-label">Now</p>
+                        <span className="intro-note-dot" />
+                    </div>
+                    <p className="panel-title">希望这里像一间收拾干净的小书桌，能看见我最近在做什么，也能安静地读点东西。</p>
+                    <div className="hero-metrics intro-metrics">
                         {metrics.map((metric) => (
                             <div key={metric.label} className="metric-card">
                                 <span className="metric-value">{metric.value}</span>
@@ -56,14 +59,67 @@ export default function HomePage({
                 </aside>
             </section>
 
+            <section className="section quiet-grid">
+                <section className="quiet-card quiet-essay">
+                    <div className="section-heading compact">
+                        <div>
+                            <p className="section-kicker">Profile</p>
+                            <h3 className="section-title">简单介绍</h3>
+                        </div>
+                    </div>
+                    <div className="mini-post-list">
+                        <div className="mini-post-item static-item">
+                            <strong>做前端</strong>
+                            <span>关心界面的呼吸感、信息层级和细节的一致性。</span>
+                        </div>
+                        <div className="mini-post-item static-item">
+                            <strong>做项目</strong>
+                            <span>喜欢把想法做成能运行的页面，而不只是停在概念上。</span>
+                        </div>
+                        <div className="mini-post-item static-item">
+                            <strong>也写东西</strong>
+                            <span>记录设计判断、实现过程和做项目时学到的方法。</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="quiet-card quiet-topics">
+                    <div className="section-heading compact">
+                        <div>
+                            <p className="section-kicker">Focus</p>
+                            <h3 className="section-title">关注方向</h3>
+                        </div>
+                    </div>
+                    <div className="topic-list compact-topic-list">
+                        {topics.map((topic) => (
+                            <button
+                                key={topic.name}
+                                type="button"
+                                className="topic-card topic-button"
+                                onClick={() => {
+                                    onSelectTopic(topic.name);
+                                    navigate('/topics');
+                                }}
+                            >
+                                <div className="topic-head">
+                                    <h4>{topic.name}</h4>
+                                    <span>{topic.count} 篇</span>
+                                </div>
+                                <p>{topic.description}</p>
+                            </button>
+                        ))}
+                    </div>
+                </section>
+            </section>
+
             {featuredPost && (
-                <section className="section section-featured">
+                <section className="section section-featured feature-strip">
                     <div className="section-heading">
                         <div>
                             <p className="section-kicker">Selected Writing</p>
-                            <h3 className="section-title">先看这篇</h3>
+                            <h3 className="section-title">先读这一篇</h3>
                         </div>
-                        <p className="section-description">如果你只读一篇，就从这里开始。这篇最能代表我最近在思考的问题和表达方式。</p>
+                        <p className="section-description">这篇最接近我当前的兴趣和表达方式，可以当作这个站点的入口。</p>
                     </div>
                     <article className="feature-card">
                         <div className="feature-media">
@@ -78,7 +134,7 @@ export default function HomePage({
                                 <span>{featuredPost.views.toLocaleString('zh-CN')} 阅读</span>
                             </div>
                             <Link to={`/posts/${featuredPost.slug}`} className="primary-link feature-link">
-                                读这篇文章
+                                进入阅读
                             </Link>
                         </div>
                     </article>
@@ -92,6 +148,7 @@ export default function HomePage({
                             <p className="section-kicker">Recent Writing</p>
                             <h3 className="section-title">最近更新</h3>
                         </div>
+                        <Link to="/archive" className="section-link">查看全部</Link>
                     </div>
                     <PostList
                         posts={latestPosts}
@@ -102,52 +159,9 @@ export default function HomePage({
                 </div>
 
                 <aside className="sidebar">
-                    <section className="sidebar-card">
-                        <p className="section-kicker">About Me</p>
-                        <h3 className="sidebar-title">我在做什么</h3>
-                        <div className="mini-post-list">
-                            <div className="mini-post-item static-item">
-                                <strong>前端体验</strong>
-                                <span>关注界面层次、动效节奏和更稳定的交互表达。</span>
-                            </div>
-                            <div className="mini-post-item static-item">
-                                <strong>个人项目</strong>
-                                <span>把想法快速做成可运行的产品，而不是只停留在笔记里。</span>
-                            </div>
-                            <div className="mini-post-item static-item">
-                                <strong>长期写作</strong>
-                                <span>持续记录实现过程、设计判断和做项目时踩过的坑。</span>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section className="sidebar-card">
-                        <p className="section-kicker">Focus Areas</p>
-                        <h3 className="sidebar-title">当前方向</h3>
-                        <div className="topic-list">
-                            {topics.map((topic) => (
-                                <button
-                                    key={topic.name}
-                                    type="button"
-                                    className="topic-card topic-button"
-                                    onClick={() => {
-                                        onSelectTopic(topic.name);
-                                        navigate('/topics');
-                                    }}
-                                >
-                                    <div className="topic-head">
-                                        <h4>{topic.name}</h4>
-                                        <span>{topic.count} 篇</span>
-                                    </div>
-                                    <p>{topic.description}</p>
-                                </button>
-                            ))}
-                        </div>
-                    </section>
-
-                    <section className="sidebar-card">
+                    <section className="sidebar-card sidebar-soft">
                         <p className="section-kicker">Quick Picks</p>
-                        <h3 className="sidebar-title">值得先读</h3>
+                        <h3 className="sidebar-title">顺手看看</h3>
                         <div className="rank-list">
                             {popularPosts.map((post, index) => (
                                 <button
@@ -168,13 +182,13 @@ export default function HomePage({
                 </aside>
             </section>
 
-            <section className="section journal-section">
+            <section className="section journal-section home-journal">
                 <div className="section-heading">
                     <div>
-                        <p className="section-kicker">Now</p>
-                        <h3 className="section-title">最近在推进</h3>
+                        <p className="section-kicker">Diary</p>
+                        <h3 className="section-title">最近在做</h3>
                     </div>
-                    <p className="section-description">除了文章，我也想让这里保留一点个人状态，告诉你这个站点背后的人最近在忙什么。</p>
+                    <p className="section-description">保留一点近况，让这个站点不只是静态页面，也像真实生活里的缓慢更新。</p>
                 </div>
                 <div className="journal-list">
                     {journal.map((entry) => (
@@ -189,13 +203,13 @@ export default function HomePage({
                 </div>
             </section>
 
-            <section className="section subscribe-section">
+            <section className="section subscribe-section home-links">
                 <div className="contact-copy">
                     <div>
                         <p className="section-kicker">Elsewhere</p>
-                        <h3 className="section-title">想继续了解，可以从这里往下走</h3>
+                        <h3 className="section-title">接下来去哪里</h3>
                     </div>
-                    <p className="section-description">如果你想看完整写作、按主题浏览，或者先快速了解我，这里保留了三个最直接的入口。</p>
+                    <p className="section-description">不想把首页做得太满，所以把后续入口收在这里，干净一点，也更容易继续浏览。</p>
                 </div>
                 <div className="contact-grid">
                     <Link to="/archive" className="contact-card">
